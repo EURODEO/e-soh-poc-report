@@ -1,6 +1,6 @@
 SHELL := /bin/bash 
 
-PANDOC = /usr/bin/pandoc
+PANDOC = pandoc
 HTMLFILE = e-soh-poc-doc.html
 BROWSER = chromium
 
