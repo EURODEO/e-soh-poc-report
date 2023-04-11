@@ -14,9 +14,23 @@ pandoc:
 	echo "" >> pandoc.TMP
 	cat poc-experiments/poc-experiments.md >> pandoc.TMP
 	echo "" >> pandoc.TMP
+	cat poc-experiments/datastore/datastore.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
+	cat poc-experiments/datastore-elastic/datastore-elastic.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
+	cat poc-experiments/datastore-sqlvsfiles/datastore-sqlvsfiles.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
+	cat poc-experiments/event-streaming/event-streaming.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
 	cat poc-experiments/wis2box/* >> pandoc.TMP
 	echo "" >> pandoc.TMP
 	cat previous-exp/previous-exp.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
+	cat previous-exp/3rdpartyPGIS-at-FMI.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
+	cat previous-exp/EDR-at-FMI.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
+	cat previous-exp/EDR-at-KNMI.md >> pandoc.TMP
 	echo "" >> pandoc.TMP
 	cat conclusion/* >> pandoc.TMP
 	echo "" >> pandoc.TMP
