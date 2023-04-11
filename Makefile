@@ -28,6 +28,8 @@ pandoc:
 	echo "" >> pandoc.TMP
 	cat previous-exp/3rdpartyPGIS-at-FMI.md >> pandoc.TMP
 	echo "" >> pandoc.TMP
+	cat previous-exp/3rdparty-GeomesaS3-at-FMI.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
 	cat previous-exp/EDR-at-FMI.md >> pandoc.TMP
 	echo "" >> pandoc.TMP
 	cat previous-exp/EDR-at-KNMI.md >> pandoc.TMP
