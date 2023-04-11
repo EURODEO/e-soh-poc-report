@@ -1,5 +1,6 @@
 # Introduction
 
-To be here.
+In this report we present the outcome of PoC (Proof-of-Concept) experiments in the EU RODEO project (E-SOH work package, WP3) in 2023.
 
+In addition, we conclude results of some relevant earlier technical experiments and productional architectures set up and operated by some of the participating EUMETNET member institutes. Thus this report is divided in two main sections: PoC experiments and Previous experiences.
 
