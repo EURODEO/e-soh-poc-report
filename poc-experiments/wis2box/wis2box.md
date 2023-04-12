@@ -1,7 +1,89 @@
 ## WIS 2.0 in a box (wis2box) evaluation
 
-To be here.
+From the `wis2box` [site](https://docs.wis2box.wis.wmo.int/en/latest/):
 
-### subtitle
+*WIS2 in a box (wis2box) is a Free and Open Source (FOSS) Reference Implementation of a WMO WIS2 node. 
+The project provides a plug and play toolset to ingest, process, and publish weather/climate/water data 
+using standards-based approaches in alignment with the WIS2 principles. 
+wis2box also provides access to all data in the WIS2 network. 
+wis2box is designed to have a low barrier to entry for data providers, 
+providing enabling infrastructure and services for data discovery, access, and visualization.*
 
-#### sub-sub
+In E-SOH, we looked at `wis2box` to evaluate if it could be used as a basis for E-SOH development.
+
+### Design
+An interesting design choice in `wis2box` is to use Elasticsearch as a storage backend for the API.
+By storing a GeoJSON documents for each of the observation parameters directly into Elastic,
+it can be used to do the selection and filtering required for implementing the OGC Feature API 
+(which returns GeoJSON collection). This works because the API reply is just a filtered list of
+all the GeoJSON objects.
+Elastic also provides a straightforward approach to implement the "Replay" functionality,
+by storing all MQTT notifications in another Elastic index.
+
+For an API that returns CoverageJSON (i.e. the proposed EDR API for E-SOH), using Elastic for storage
+seems less straightforward. This is because in CoverageJSON the different measurements for each parameter
+are returned as JSON arrays. This leads to a very compact result, but it means the response for different
+measurements can not just be concatenated together.
+
+`wis2box` uses the `pygeoapi` library to provide the OGC Feature API. 
+The `pygeoapi` library also supports OGC EDR, 
+but the [support](https://docs.pygeoapi.io/en/latest/data-publishing/ogcapi-edr.html) for different
+backends is currently limited to NetCDF and Zarr.
+
+### Performance
+
+The following tests were done on a MacBook Pro with Apple M1 Pro processor.
+Four cores (out of a total of 10) and 16 GB of memory were assigned to Docker,
+unless otherwise noted.
+
+#### Loading data
+
+We load one month of KNMI data for about 60 stations 
+(detailed setup instruction can be found [here](https://github.com/EURODEO/e-soh-wis2box-demo)).
+This consists of 672 (=28x24) BUFR files, one for each observation time.
+Each BUFR files contains multiple messages for the different stations.
+
+The data load takes more than an hour to complete.
+240 MB of space is used by Elastic after loading 11 MB of BUFR files.
+
+If the wis2box-management container (which does the bulk of the work during data load)
+is killed during the load, the loading does not continue when the container is restarted.
+
+#### API load test
+We set up a load test of the Feature API of the wis2box using [locust](https://locust.io/).
+Each request ask for a month of data for a single parameter (one of four)
+for a single station (one of seven). The `full` Feature API response is by default
+very verbose (740 KB for a month of data), so we also test a `light` response
+with most metadata left out (167 KB for a month of data).
+`gz` compression is used for all responses.
+
+Each "user" does a new request as soon as the previous request finished.
+Multiple users do parallel requests.
+
+We get the following results:
+
+| cores | users | request type | req/s |
+|------:|------:|--------------|------:|
+|     4 |     1 | full         |    25 | 
+|     4 |    20 | full         |    90 | 
+|     4 |     1 | light        |    30 | 
+|     4 |    20 | light        |   115 | 
+|     8 |     1 | full         |    24 | 
+|     8 |    20 | full         |   140 | 
+|     8 |     1 | light        |    30 | 
+|     8 |    20 | light        |   170 | 
+
+
+### Comments/Conclusions
+
+Based on our very limited testing of wis2box, we have the following 'conclusions':
+
+- It is designed in a way to leverage existing technology like Elastic.
+- The datastore supporting the API is optimised for OGC Feature API/GeoJSON.
+- Ingestion of 40K station observations (each with multiple parameters) take one hour on my test setup.
+The relative slowness of this is probably caused by all processing being done serially in Python.
+- Ingestion is not fault-tolerant with default settings 
+(killing and restarting `wis2box-management` container leads to ingestion data loss; 
+`WIS2BOX_BROKER_QUEUE_MAX` needs to be increased to avoid data loss). 
+- The internal elastic storage is verbose, due to the Feature JSON format and storing all the messages (needed for Replay funcitonality).
+- Query performance is good for a Python API (due to offloading of heavy lifting to Elastic?).
