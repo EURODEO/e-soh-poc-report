@@ -4,7 +4,7 @@ FMI has been using PostgreSQL and PostGIS as a database solution for many years.
 
 ![simplified digram](./3rdparty-postgis-FMI-simplified.drawio.svg) 
 
-The database is based on narrow data table paradigm, and the data table is shown in the figure as "3rdparty_obsdata" (Not all fields are shown, but the essential ones to explain the concept. In addition, there are e.g. quality control related fields in the table).
+The database is based on narrow data table paradigm, and the data table is shown in the figure as "3rdparty_obsdata" (Not all fields are shown, but just the essential ones to explain the concept. There are e.g. quality control related fields in the table that are not shown here).
 
 Every measured parameter per timestamp (and per station) is inserted as a new row in the database. There are flexibility to ingest either numerical values or textual values (or even both) depending on each parameter's need. But before ingesting data, there should be defined a producer for that dataset. Producer has its own parameter namespace and station namespace. Aim is that the data producer can ingest its own station identifiers and the database can handle own station id namespace for each data producer. Data ingestion logic (written in pg/SQL) handles creation of new stations and parameters automatically based on the data input.
 
