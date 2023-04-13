@@ -1,11 +1,30 @@
-
 ## Experiences on using Geomesa and S3 storage for 3rdparty observations (FMI, Finland)
 
-Development of a new 3rdparty handling system based on S3 file storage started from motivation to cut down the operation costs of the PostGIS based solution (see the previous section). Development project's target was to find a solution that doesn't have that steep price curve when the amount of data is scaled up by the factor of 10 or 100 or even 1000.
+Development of a new 3rdparty handling system based on S3 file storage started from motivation to cut down the operation costs of the PostGIS based solution (see the previous section). There were also needs to enhance the earlier TITAN deployment (that used AWS Lambda). Development project's main target was to find a data handling solution on AWS (Amazon Web Services) that doesn't have that steep price curve when the amount of data is scaled up by the factor of 10 or 100 or even 1000.
 
-Development of the system took place in 2021 in a project supported by external consultants who did the majority of the technical planning, evaluation and implementation. Scope of the implementation was data ingestion from 3rdparty data provider (fetch data from there) into data storage, then running TITAN QC for that data and serving it out through OGC EDR API, which was integral part of the reference/PoC impelementation.
-
-The project resulted in MIT-licensed "proof-of-concept" stage system called TIUHA -- code shared on Github, see url: https://github.com/fmidev/tiuha. After the development phase FMI has worked on the QC part and transferred the system to run on Openshift environment (fork to be merged).
+Development of the system took place in the second half of year 2021 as a project supported by external consultants who did the majority of the technical planning, evaluation and implementation. Scope of the implementation was data ingestion from 3rdparty data provider (fetch data from there) into data storage, then running TITAN QC for that data and serving it out through OGC EDR API, which was integral part of the reference/PoC impelementation. The project resulted in a MIT-licensed "proof-of-concept" stage system called TIUHA -- code shared on Github, see url: https://github.com/fmidev/tiuha. After the development phase FMI has worked on the QC part and transferred the system to run on Openshift environment (fork to be merged).
 
 Here we represent the fundamental concept of the system and list some pros and cons.
 
+Initially, in the beginning of the project, the planning hypothesis was that NoSQL could cut operation costs. Thus the initial survey concentrated on availability of NoSQL databases, especially Cassandra, as a managed service on AWS. After this study the conclusion was that Cassandra-compatible NoSQL database AWS Keyspaces would actually bring less operation cost compared to the reference (PostGIS), but taking into account proper indexing (to serve geospatial queries etc) it wasn't a gamechanger to cope with the exponential data growth. AWS S3 storage is way cheaper than e.g. database storage in managed services so we changed quite rapidly the course in the project and started to examine S3. It led us to seek possibilities to operate on georeferenced files, in this case Geomesa (www.geomesa.org). Geomesa is also able to operate on top of Accumulo, HBase, Google Bigtable and Cassandra database, but due to the operation cost optimization reason we looked at simple file storage.
+
+From that background the system was based on S3 storage and container-based computation in AWS. The system overview is presented in the following figure. 
+
+![simplified digram TIUHA](./FMI-S3-Geomesa-3rdparty.drawio.png) 
+
+The system is based on continously-running container that is responsible for API and scheduling and QC task container that a container is spinned up by the continously-running container. 
+
+GeoMesa is used to operate on .parquet files (see https://parquet.apache.org/) in the S3 bucket, both writing them and reading them (by the API). All Geomesa-dependent handling, including the integrated OGC EDR API was written in Kotlin. 
+
+Pros 
+
+1. reduced operation cost by using S3 object storage
+1. relatively simple architecture
+1. optimized for this single purpose, also for certain queries -- serving them well
+
+Cons
+
+1. reduction in operation cost didn't come without price: dependency to Geomesa library and need to prepare files for certain queries (consumes more disk space compared to reference PostGIS implementation)
+1. PostGIS-based reference setup was more flexible for different usage scenarios
+
+As the implementation is in early phase (more like PoC than production system), we'll don't dive here into deeper anlysis what could be enhanced technically (e.g. splitting API and scheduler into separate containers).

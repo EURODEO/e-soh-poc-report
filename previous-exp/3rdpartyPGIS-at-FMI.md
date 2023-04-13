@@ -2,7 +2,7 @@
 
 FMI has been using PostgreSQL and PostGIS as a database solution for many years. For 3rdparty observations, FMI has been using during recent years PostGIS in AWS (RDS, Relational Database Service, i.e. relational database as a service). The database schema is planned to be flexible enough to contain different kind of datasets and adding new dataset is planned to be easy. Here we explain the concept with a simplified diagram.
 
-![simplified digram](./3rdparty-postgis-FMI-simplified.drawio.svg) 
+![simplified digram](./3rdparty-postgis-FMI-simplified.drawio.png) 
 
 The database is based on narrow data table paradigm, and the data table is shown in the figure as "3rdparty_obsdata" (Not all fields are shown, but just the essential ones to explain the concept. There are e.g. quality control related fields in the table that are not shown here).
 
