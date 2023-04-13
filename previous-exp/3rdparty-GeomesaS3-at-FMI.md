@@ -10,7 +10,7 @@ Initially, in the beginning of the project, the planning hypothesis was that NoS
 
 From that background the system was based on S3 storage and container-based computation in AWS. The system overview is presented in the following figure. 
 
-![simplified digram TIUHA](./FMI-S3-Geomesa-3rdparty.drawio.png) 
+![](previous-exp/FMI-S3-Geomesa-3rdparty.drawio.png) 
 
 The system is based on continously-running container that is responsible for API and scheduling and QC task container that a container is spinned up by the continously-running container. 
 
