@@ -24,6 +24,6 @@ Pros:
 
 Cons:
 
-1. maybe not directly scalable for extreme amounts of data (lots of rows, not just lots of queries)
+1. it may not directly scale to big amounts of data (lots of rows)
 2. it's relatively expensive to store (and operate) big amount of data in AWS RDS database.
 3. every producer has its own measurand namespace, there is the question how to have unified parameter catalogue. Unresolved.
