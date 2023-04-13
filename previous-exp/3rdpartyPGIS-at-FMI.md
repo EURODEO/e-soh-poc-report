@@ -1,6 +1,6 @@
 ## Experiences on PostGIS-based database for 3rdparty observations
 
-FMI has been using PostGIS in AWS (RDS, Relational Database Service, i.e. relational database as a service) for 3rdparty observations. The database schema is planned to be flexible enough to contain different kind of datasets and adding new dataset is planned to be easy. Here we explain the concept with a simplified diagram.
+FMI has been using PostgreSQL and PostGIS as a database solution for many years. For 3rdparty observations, FMI has been using during recent years PostGIS in AWS (RDS, Relational Database Service, i.e. relational database as a service). The database schema is planned to be flexible enough to contain different kind of datasets and adding new dataset is planned to be easy. Here we explain the concept with a simplified diagram.
 
 ![simplified digram](./3rdparty-postgis-FMI-simplified.drawio.svg) 
 
