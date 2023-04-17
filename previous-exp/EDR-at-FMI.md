@@ -2,7 +2,7 @@
 
 ### Introduction
 
-OGC API EDR at FMI was first implemented in the [GeoE3 project] (https://geoe3.eu/) as a plugin to FMI's existing [SmartMet Server data server] (https://github.com/fmidev/smartmet-server). There it has already been utilized for a number of use cases including Intelligent Traffic and Energy Efficiency for buildings.
+OGC API EDR at FMI was first implemented in the [GeoE3 project](https://geoe3.eu/) as a plugin to FMI's existing [SmartMet Server data server](https://github.com/fmidev/smartmet-server). There it has already been utilized for a number of use cases including Intelligent Traffic and Energy Efficiency for buildings.
 
 In addition to GeoE3 project the main drivers to use EDR is the Geoweb weather visualization project developed in collaboration with Met Norway and KNMI and provide a more user friendly open data interface replacing the legacy OGC WFS. Geoweb will act as an EDR client to visualize timeseries data for users. OGC WFS provides complex XML based output whereas OGC API EDR by default recommends CoverageJSON which is more suitable for web development purposes. It also converts more nicely to HTML via the OpenAPI specification which enables data to be indexed by search engines more easily.
 
