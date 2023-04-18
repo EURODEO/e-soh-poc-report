@@ -26,7 +26,7 @@ CoverageJSON Pydantic model. Any filtering (including geo) is done in the databa
 ### Benchmark
 Load testing was performed for the following database backends were tested:
 
-- PostgreSQL production setup as described above
+- PostgreSQL production setup as described above (2 capacity units, 8 vCPU for API service)
 - PostgreSQL on a laptop: similar to described above, but running locally in a `docker compose` stack 
 - [Timescale](https://www.timescale.com/) on a laptop: similar to PostgreSQL on a laptop, but with the data
 table replaced by a Timescale Hypertable with chunks of 4 weeks, and all data older than 8 weeks compressed, 
@@ -44,9 +44,9 @@ Results:
 
 | DB                      | 	Users | 	Requests per second | 	Mean request time (ms) |
 |-------------------------|-------:|---------------------:|------------------------:|
-| PostgreSQL (production) |    	 1 |                  	?? |                     	?? |
-| PostgreSQL (production) |    	10 |                  	?? |                     	?? |
-| PostgreSQL (production) |    	25 |                  	?? |                     	?? |
+| PostgreSQL (production) |    	 1 |                  	16 |                     	42 |
+| PostgreSQL (production) |    	10 |                  103 |                     	77 |
+| PostgreSQL (production) |    	25 |                 	154 |                    	130 |
 | PostgreSQL (laptop)     |    	 1 |                  	23 |                     	32 |
 | PostgreSQL (laptop)     |    	10 |                  	78 |                    	100 |
 | PostgreSQL (laptop)     |    	25 |                  	80 |                    	250 |
