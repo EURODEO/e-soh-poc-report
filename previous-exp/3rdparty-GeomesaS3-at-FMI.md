@@ -24,7 +24,7 @@ Pros
 
 Cons
 
-1. reduction in operation cost didn't come without price: dependency to Geomesa library and need to prepare files for certain queries (consumes more disk space compared to reference PostGIS implementation)
+1. reduction in operation cost didn't come without price: dependency to Geomesa library (Java) [and its dependencies] and need to prepare files for certain queries (consumes more disk space compared to reference PostGIS implementation)
 1. PostGIS-based reference setup was more flexible for different usage scenarios
 
 As the implementation is in early phase (more like PoC than production system), we'll don't dive here into deeper anlysis what could be enhanced technically (e.g. splitting API and scheduler into separate containers).
