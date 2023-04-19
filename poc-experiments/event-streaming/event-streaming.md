@@ -19,6 +19,6 @@ support OGC Feature queries. An alternative is to use PostgreSQL as an event sto
 
 An example C4 diagram using Elastissearch as event store is given below.
 
-![](poc-experiments/event-streaming/c4-container-data-store.png) 
+![](poc-experiments/event-streaming/c4_container_data_store.svg) 
 
 [//]: # (![]&#40;c4-container-data-store.png&#41; )
