@@ -1,6 +1,9 @@
 
 ## Elasticsearch
 
+During the E-SOH design phase, we looked at how Elasticsearch is used in wis2box,
+and experimented with that setup. We also looked at Elastiscsearch documentation.
+
 As is shown by the OGC Feature API in wis2box, Elasticsearch can be used a storage backend.
 This works well in the case where the API returns a collection of documents 
 (potentially with some information filtered out) which can be stored in Elasticsearch.
