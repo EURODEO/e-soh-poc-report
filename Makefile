@@ -14,6 +14,8 @@ pandoc:
 	echo "" >> pandoc.TMP
 	cat poc-experiments/poc-experiments.md >> pandoc.TMP
 	echo "" >> pandoc.TMP
+	cat poc-experiments/infrastructure-poc/infrastructure-poc.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
 	cat poc-experiments/datastore/datastore.md >> pandoc.TMP
 	echo "" >> pandoc.TMP
 	cat poc-experiments/datastore-elastic/datastore-elastic.md >> pandoc.TMP
