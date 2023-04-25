@@ -8,7 +8,7 @@ TimescaleDB’s native compression works by converting uncompressed rows of data
 Compression can be enabled on individual hypertables by declaring which columns to segment by. Once compression is enabled, the data can then be compressed in by using an automatic policy or manually compressing chunks.
 By reducing the amount of data that needs to be read, compression can lead to increases in performance. However, benefits of compression depends on data and queries that are run against it.
 
-One useful TimescleDB feature is continuous aggregates which can be used to pre-aggregate data into useful summaries. Materialized views are used continuously and incrementally refresh a query in the background.
+One useful TimescleDB feature is continuous aggregates which can be used to pre-aggregate data into useful summaries. Materialized views are used to continuously and incrementally refresh a query in the background.
 
 TimescaleDB has built-in support for horizontal scaling through its multi-node feature. One of the databases exists on an access node and stores metadata about the other databases. The other databases are located on data nodes and hold the actual data. Multi-node setup improves write scalability and query performance, but it can be more complex to setup and manage.
 
