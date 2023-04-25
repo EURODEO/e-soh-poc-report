@@ -32,7 +32,6 @@ The following use cases are currently implemented:
 
 | Name  | Description |
 | :---- | :---------------------------------- |
-| Reset | Reset storage with *n* time series, wiping all existing data. |
 | Fill  | Fill storage with observations. |
 | AddNew | Add new observations to the storage while deleting any old observations and overwriting any existing ones. |
 | GetAll | Retrieve all observations. |
@@ -85,6 +84,4 @@ all.
 
 #### Test results
 
-<span style="color:#ff0000">
-**MORE INFO HERE SOON!**
-</span>
+![](poc-experiments/datastore-sqlvsfiles/test_results.png)
