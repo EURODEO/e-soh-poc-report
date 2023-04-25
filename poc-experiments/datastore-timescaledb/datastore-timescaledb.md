@@ -12,7 +12,7 @@ One useful TimescleDB feature is continuous aggregates which can be used to pre-
 
 TimescaleDB has built-in support for horizontal scaling through its multi-node feature. One of the databases exists on an access node and stores metadata about the other databases. The other databases are located on data nodes and hold the actual data. Multi-node setup improves write scalability and query performance, but it can be more complex to setup and manage.
 
-TimescaleDB also support master-replica setup as it is built on top PostgreSQL. This setup brings high availability and read scalability but write scalability might be a bottleneck.
+TimescaleDB also support master-replica setup as it is built on top of PostgreSQL. This setup brings high availability and read scalability but write scalability might be a bottleneck.
 
 How to test:
 - Add Timescale extension to current PostGIS database
