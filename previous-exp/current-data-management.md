@@ -1,0 +1,124 @@
+## NMHS observation pipelines today
+
+This section contains information about current methods Members use to share observations today and their plans to deliver observations in the future, as provided during the design phase. The focus is on data from Automatic Weather Stations (AWS), and not data from all observation networks.
+
+### MET Norway
+
+**Transfer of observations to GTS**:
+
+* Data are collected from stations and sent through a Quality Control (QC) system.
+* Quality controlled observations from QC are sent on a Kafka queue in an internal XML format.
+* BUFR generation job listens on Kafka queue and creates BUFR files for each message on the queue. The BUFR files are then sent to an in-house built GTS server. This GTS server then creates GTS messages based on these BUFR files.
+
+**Sharing of near real-time and archive data through APIs**:
+
+* Internal pub/sub solution based on Kafka
+* Custom built REST interface (https://frost.met.no) for querying observations data, but it is not OGC-API EDR, and it does not comply with the FAIR principles, e.g.,
+  * Unique and persistent identifiers are missing
+  * It is a non-standard custom API
+  * No standard vocabularies
+  * Provenance is missing
+
+MET Norway has during the last 4 years worked on unifying its general data management to meet the FAIR principles through a metadata driven approach. To enable FAIR observations data timeseries, we do the following: 
+
+* Observations are retrieved from frost.met.no and written to NetCDF-CF files that are made available through an OPeNDAP API. The NetCDF-CF files contain data per instrument per station, and both raw and corrected observations. It is filled with new observations on regular intervals. The data is documented with discovery metadata following the Attribute Convention for Data Discovery (ACDD) plus extensions to support extended interoperability, and use metadata following the CF convention. 
+* The discovery and use metadata are used to create XML files with discovery metadata following an internal specification (MMD; https://github.com/metno/mmd). This metadata also contains information about data access, e.g., file paths, OPeNDAP urls and OGC WMS urls. 
+* The MMD XML files are ingested in a SOLR database (nosql)
+* SOLR is connected to the outside world through APIs (e.g., AOI-PMH, CSW, opensearch) and web solutions in drupal to provide both machine-to-machine and human-machine interfaces. The drupal websites also contain persistent dataset landing pages.
+* Translation (xslt) of the discovery metadata between different standards is done on the fly when requested by the user, in order to enable interoperability.
+
+One example implementation of the system is the [Svalbard Integrated Arctic Earth Observing System](https://sios-svalbard.org/). AWS datasets from Svalbard can here be found via [a human search interface](https://sios-svalbard.org/metsis/search?f%5B0%5D=activity_type%3AIn%20Situ%20Land-based%20station). Some funcitionality is still under development, but the metadata driven approach to data management should be clear, e.g., demonstrating discovery metadata interoperability through the "Export metadata" function. See the [SIOS Data Management System](https://sios-svalbard.org/Data) web page for more information.
+
+**Plans to become compliant with WIS 2.0**
+
+* No – we aim to reuse as much as possible. We have ongoing collaboration with the geopython group, and have started using pygeoapi 
+* We do not outsource any development work
+* RODEO/E-SOH is used
+
+### KNMI
+
+**Current production chain for collecting observations data and sending them to users**:
+
+Observations data is transferred to the GTS server through an inhouse message format that is translated to BUFR messages and put onto GTS using MSS. There is also an SQL observation database (KMDS), but the BUFR message generation is not based on data in the database (parallel track). 
+
+**Sharing of near real-time and archive data through APIs**:
+
+In the KNMI Data Platform there is both a file-based API, and a (alpha) EDR API that provide observation data at 10-minute intervals. The EDR API can currently be queried by position (lat/lon) or station ID. The return format is CoverageJSON. 
+
+**Plans to become compliant with WIS 2.0**
+
+KNMI do plan to be compliant with WIS 2.0, but there is no definite plan yet, just some ingredients for a solution including RODEO WP3 components. 
+
+Building a solution yourself? NO, preferably not. Currently we use MSS, we might replace this with a newer version which would hopefully be WIS2.0 compliant 
+
+Outsourcing the development work to a 3rd party? Or,  
+
+Using the deliverables of RODEO WP3 (E-SOH)? YES, as much as possible 
+
+**Number of stations and the temporal resolution of the data that might be made available**
+
+How many AWS do you operate and will make available? 
+-> Official AWS: 26. If we also count airfields and offshore rigs, there are about 60 stations that provide observation data. 
+
+What temporal resolution do you expect to be made available from these stations 
+-> 10 minutes 
+
+Can you provide information about the format(s) you plan to share data with users 
+-> Sub hourly BUFR is being worked on (but not in production). CoverageJSON for the API. 
+
+### FMI 
+ 
+
+What is your current production chain for collecting observations data and sending them to Users? For example, can you explain...   
+
+**How do you transfer observations data to the GTS server?**
+
+1. Process regularly collect observations from stations. Observations are stored in database. 
+
+2. QC is triggered by storage to database, and quality flags are set on the data. 
+
+3. Fetch data regularly from database, convert to BUFR and copy to GTS server. 
+
+**Comment:** Input data file (one or more stations) -> converted to BUFR data file (same amount of stations as input file) -> BUFR file is copied to MSS as it is. 
+
+**Do you already share near real-time and archive data through APIs?** Yes via SmartMet Server OGC WFS and timeseries plugin functionality.
+
+**Is this a pub/sub type solution to files hosted on a web server?** Neither.
+
+**Do you have a facility for users to query a ‘database’ to access observations using a EDR compliant API?** Yes, OGC API EDR in progress.
+
+**Do you have definite plans to become compliant with WIS 2.0? If so, does it involve...** A and C.
+
+WIGOS Station Identifiers are already implemented in the rain observation data and converted to BUFR data, but they are not yet sent out to Sweden nor Estonia. We are planning of implementing WSI in other observation data as well (AWS sub-hourly BUFR, ocean data).  
+
+**Could you give us a bit more information about the number of stations and the temporal resolution of the data that might be made available.** AWS stations = 175 + Airports = 19 = 194, all of these have WMO number.  
+
+**How many AWS do you operate and will make available?** 175 
+
+### Met Office (UK) 
+
+**Current Production Chain and GTS distribution:**
+
+1. Collect data from stations 
+   a. Store data in database.  
+      i. Basic QC as data are stored,  
+      ii. Station metadata added,  
+      iii. Data averaged to minute temporal resolution. 
+   b. EDR interface to database, near real-time data and archived data through same interface. 
+   c. Product generation system creates BUFR files.  
+      i. Every 10 minutes gets data from DB, creates BUFR files for each station according to WMO standard for sub-hourly surface observations. 
+      ii. Every hour gets data from DB, creates BUFR files for each station according to WMO standard for hourly surface observations. 
+   d. Hourly BUFR files get copied to GTS via Met Office Moving Weather systems. (Sub-hourly BUFR messages are not shared on the GTS but are available for internal Met Office use.) 
+2. API Access 
+   a. We don’t have a pub/sub solution yet for the 10 min BUFR files but it is planned 
+   b. Yes, we have EDR access to AWS station data 
+
+**WIS 2.0 plans**
+
+We plan to build a solution ourselves but will adapt our solution to match that being developed by RODEO WP3 and to be compliant with FEMDI as well as WIS 2.0. 
+
+**Current AWS Network**
+
+1. Approximately 300 stations. Most in the UK but also in some overseas territories. 
+2. 1-minute observations are available through the interactive EDR API. 10-minute BUFR files for each station will also be produced. 
+3. As well as BUFR, the interactive EDR API returns data in? To be confirmed. JSON? 

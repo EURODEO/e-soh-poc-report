@@ -34,12 +34,14 @@ pandoc:
 	echo "" >> pandoc.TMP
 	cat previous-exp/EDR-at-KNMI.md >> pandoc.TMP
 	echo "" >> pandoc.TMP
+	cat previous-exp/current-data-management.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
 	cat conclusion/* >> pandoc.TMP
 	echo "" >> pandoc.TMP
 	$(PANDOC) -s -N -B pandoc-heading.TMP --metadata title="E-SOH PoC report" --toc --toc-depth=2 -c pandoc.css -f markdown -t html pandoc.TMP > $(HTMLFILE)
 	rm pandoc.TMP
 	rm pandoc-heading.TMP
-	$(BROWSER) $(HTMLFILE)
+	#$(BROWSER) $(HTMLFILE)
 
 clean:
 	rm -f $(HTMLFILE)
