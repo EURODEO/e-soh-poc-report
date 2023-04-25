@@ -20,6 +20,8 @@ pandoc:
 	echo "" >> pandoc.TMP
 	cat poc-experiments/datastore-sqlvsfiles/datastore-sqlvsfiles.md >> pandoc.TMP
 	echo "" >> pandoc.TMP
+	cat poc-experiments/datastore-timescaledb/datastore-timescaledb.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
 	cat poc-experiments/wis2box/* >> pandoc.TMP
 	echo "" >> pandoc.TMP
 	cat previous-exp/previous-exp.md >> pandoc.TMP
