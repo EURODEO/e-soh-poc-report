@@ -11,24 +11,18 @@ System(its, "Ingest, Transform, Store", "The ITS system may have to enrich the m
 
 SystemQueue(queue, "Notification Service", "MQTT broker. WIS2 real-time data sharing by a publication/subscription (PubSub) mechanism.")
 
+ContainerDb(db, "Data Database", "Relational with a JSON datatype column for metadata")
+
 Container(edr, "Search and Access APIs", "", "OGC EDR and OGC Records", $tags = "microService")
-ContainerDb(db, "Data Database", "Relational")
-ContainerDb(db_meta, "Metadata Database", "Document based")
 Container(eventsender, "Event Dispatcher")
-Container(bootstrap, "Bootstrap", "", "Used for initial load of (meta)data store from events")
 
-Rel(its, db, "add data", "")
-Rel(its, db_meta, "add metadata", "JSON?")
-
-Rel(its, eventsender, "notifies of new entry")
-Rel(eventsender, queue, "send notifications", "mqtt")
-
-Rel_D(bootstrap, db, "load (meta)data", "")
+Rel_R(its, db, "add data and metadata to", "")
+Rel_R(its, eventsender, "notifies of new entry")
+Rel_R(eventsender, queue, "send notifications", "mqtt")
 
 Rel(consumer, queue, "listen to notifications", "mqtt over websockets")
 
 Rel(edr, db, "search and access data", "JSON")
-Rel(edr, db_meta, "search and access data", "JSON")
 Rel(consumer, edr, "", "")
 
 @enduml

@@ -14,13 +14,14 @@ SystemQueue(queue, "Notification Service", "MQTT broker. WIS2 real-time data sha
 Container(edr, "Search and Access APIs", "", "OGC EDR and OGC Records", $tags = "microService")
 ContainerDb(db, "Relational database")
 Container(eventsender, "Event Dispatcher")
-Rel(its, db, "add (meta)data", "JSON?")
-Rel(its, eventsender, "notifies of new entry")
-Rel(eventsender, queue, "send notifications", "mqtt")
+
+Rel_R(its, db, "add (meta)data", "JSON?")
+Rel_R(its, eventsender, "notifies of new entry")
+Rel_R(eventsender, queue, "send notifications", "mqtt")
 
 Rel(consumer, queue, "listen to notifications", "mqtt over websockets")
 
 Rel(edr, db, "search and access data", "JSON")
-Rel(consumer, edr, "", "")
+Rel(consumer, edr, "finds and accesses data with", "http")
 
 @enduml
