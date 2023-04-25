@@ -1,7 +1,7 @@
 ## Metadata output
 
 By using the [py-mmd-tools package](https://github.com/metno/py-mmd-tools) developed at MET Norway,
-one can create a [MET Norway Metadata Format](https://htmlpreview.github.io/?https://github.com/metno/mmd/blob/master/doc/mmd-specification.html) (MMD) file.
+one can create a [MET Norway Metadata Format](https://htmlpreview.github.io/?https://github.com/metno/mmd/blob/master/doc/mmd-specification.html) (MMD) file from a properly documented dataset (here NetCDF4).
 
 By using the xslt-transformations defined in the [MMD-repo](https://github.com/metno/mmd/tree/master/xslt), one can then transform to different metadata standards.
 
