@@ -1,2 +1,14 @@
 # Conclusions
 
+In this document we presented both the experiences gathered from PoC (proof-of-concept) experiments during the E-SOH project and some selected prior experience from the participating institutes.
+
+Architecture decisions are covered by the architecture document, so this PoC report is not commenting suitability/feasibility of evaluated techniques or solutions. 
+
+As the conclusion from the PoCs, the key findings are:
+
+* it will be possible to run the E-SOH system on EWC (European Weather Cloud) (infrastructure PoC)
+* wis2box reference implementation works, but the ingestion is too slow for our use case -- if used, needs to be further developed (wis2box PoC)
+* Elastic (formerly Elasticsearch) is one promising option for data store (document DB for JSON files, geo-query support) (Elastic&wis2box PoCs)
+* GIS-capable relational database, namely PostGIS (with or without timescaleDB extension) is another potential option for data store. (netcdf vs. DB PoC)
+* there are earlier encouraging expriences on PostGIS-based solution for similar kind of needs, and expertise on that, and expertise on EDR API implementation within the project concortium
+
