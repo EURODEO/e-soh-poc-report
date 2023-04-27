@@ -24,6 +24,8 @@ pandoc:
 	echo "" >> pandoc.TMP
 	cat poc-experiments/wis2box/* >> pandoc.TMP
 	echo "" >> pandoc.TMP
+	cat poc-experiments/metadata-output/metadata-output-poc.md >> pandoc.TMP
+	echo "" >> pandoc.TMP
 	cat previous-exp/previous-exp.md >> pandoc.TMP
 	echo "" >> pandoc.TMP
 	cat previous-exp/3rdpartyPGIS-at-FMI.md >> pandoc.TMP
