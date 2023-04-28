@@ -15,6 +15,7 @@ TimescaleDB has built-in support for horizontal scaling through its multi-node f
 TimescaleDB also support master-replica setup as it is built on top of PostgreSQL. This setup brings high availability and read scalability but write scalability might be a bottleneck.
 
 How to test:
+
 - Add Timescale extension to current PostGIS database
 - Add new TimescaleDB backend to https://github.com/EURODEO/e-soh-datastore-poc/tree/main/tstester (main thing is to convert regular tables to hypertables) 
 - Experiment with different setups (changing chunk_time_interval, maybe test how compression affects ingestion performance and so on).
