@@ -1,7 +1,7 @@
 ## NetCDF versus Postgres
 
 To compare the performance of different backends for storing recent observations, a special Python
-program has been written (ref: to repo?).
+program has been written.
 
 The storage is a rolling buffer for keeping the latest (typically 24H of) observations for a set of
 time series. Currently, two backends have been implemented/compared: A hybrid netCDF/PostGIS
@@ -60,9 +60,11 @@ The tests have been run in the following environment:
 - OS: Ubuntu 18.04 Bionic
 - Python version: 3.9
 
-The two storage backends both use a PostGIS server that runs in a local docker container
-(they use separate databases, though: `esoh_postgis` for PostGISSBE and `esoh_netcdf`
-for NetCDFSBE_TSMDataInPostGIS).
+The TimescaleDBSBE backend uses a separate TimescaleDB server running in a local docker container.
+
+The PostGISSBE and NetCDFSBE_TSMDataInPostGIS backends both use a PostGIS server that runs
+in a local docker container (they use separate databases, though: `esoh_postgis` for PostGISSBE
+and `esoh_netcdf` for NetCDFSBE_TSMDataInPostGIS).
 
 #### Test configuration
 
@@ -84,5 +86,14 @@ in the storage. Per observation metadata (such as quality of observation) is cur
 all.
 
 #### Test results
+
+**Warning:** The below results were run on 2023-04-26 and based on that version of the test
+program. There are two aspects that should be kept in mind when reading the results:
+
+- Only a small number of test runs for each combination were run. The results should thus be
+considered indicative only.
+- Although we have made some efforts to optimize the performance of all backends, we assume there
+might be further optimization potential for some of them, thus improving the fairness of the
+comparison.
 
 ![](poc-experiments/datastore-sqlvsfiles/test_results.png)
