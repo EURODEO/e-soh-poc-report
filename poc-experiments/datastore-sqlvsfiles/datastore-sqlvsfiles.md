@@ -23,7 +23,7 @@ Two backends are currently implemented:
 | :---- | :--------------------------------- |
 | TimescaleDBSBE | Keeps all data in a TimescaleDB database extended with PostGIS. |
 | PostGISSBE | Keeps all data in a Postgres database extended with PostGIS. |
-| NetCDFSBE_TSMDataInPostGIS | Keeps all data in netCDF files on the local file system, one file per time series. Per time series metadata (i.e. not actual observations) will also be kept in a Postgres database GIS database extended with PostGIS to speed up searching for target files to retrieve observations from. |
+| NetCDFSBE_TSMDataInPostGIS | Keeps all data in netCDF files on the local file system, one file per time series. Per time series metadata (i.e. not actual observations) will also be kept in a Postgres database extended with PostGIS to speed up searching for target files to retrieve observations from. |
 
 **Note:** the program is designed to make it easy to add more backends.
 
