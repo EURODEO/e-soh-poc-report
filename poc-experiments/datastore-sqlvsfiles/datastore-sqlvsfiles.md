@@ -68,7 +68,7 @@ and `esoh_netcdf` for NetCDFSBE_TSMDataInPostGIS).
 
 #### Test configuration
 
-The most relevant configuration settings are these:
+The currently relevant configuration settings are these:
 
 | Name | Description |
 | :---- | :---------------------------------- |
@@ -76,7 +76,7 @@ The most relevant configuration settings are these:
 | `nstations` | Number of stations to simulate. |
 | `nparams` | Number of parameters to simulate. (The number of time series will thus be `nstations` * `nparams`) |
 | `time_res`  | Time series resolution in seconds. |
-| `bbox` | Geographical bounding box (i.e. lat/lon ranges) used for generating random (and unique) station locations. |
+| `extra_secs` | Applicable to the *AddNew* use case, this is the number of seconds worth of new observations to add/merge into the storage. |
 
 #### Metadata
 
