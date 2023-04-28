@@ -98,3 +98,6 @@ might be further optimization potential for some of them, thus improving the fai
 comparison.
 
 ![](poc-experiments/datastore-sqlvsfiles/test_results.png)
+
+To conclude the testing conducted in this PoC so far, write performance seems to be better when using files directly, while databases seem to outperform direct file access in data query operations. Comparison will give even more interesting results once Elastic is taken into comparison, too. A time search demo is also considered to be added. Geosearches can also be benchmarked, but it's not relevant before Elastic is added into this testbench.
+
