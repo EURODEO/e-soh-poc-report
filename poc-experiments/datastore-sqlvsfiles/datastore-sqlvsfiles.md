@@ -4,8 +4,9 @@ To compare the performance of different backends for storing recent observations
 program has been written.
 
 The storage is a rolling buffer for keeping the latest (typically 24H of) observations for a set of
-time series. Currently, two backends have been implemented/compared: A hybrid netCDF/PostGIS
-solution, and a pure PostGIS solution.
+time series. Currently, three backends have been implemented/compared: two variants based only
+on a (Postgres-based) relational database and one variant that keeps the observations in netCDF
+files.
 
 An *observation* is assumed to consist of two components:
 
@@ -17,7 +18,7 @@ A *time series* is assumed to be identified by the combination of a *station* an
 
 ### Storage backends
 
-Two backends are currently implemented:
+The following backends are currently implemented:
 
 | Name  | Description |
 | :---- | :--------------------------------- |
