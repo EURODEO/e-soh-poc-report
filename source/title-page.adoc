@@ -1,0 +1,22 @@
+= E-SOH Proof of Concept Document
+Lasse Latva, Johannes Tobiassen Langvatn, Jo Asplin, Lukas Phaf, Matti Hämälainen, Mikko Visa, Daniel Heintze, Morten Wergeland Hansen.
+
+[discrete]
+== Abstract
+
+This report presents the outcome of the Proof-of-Concept (PoC) experiments in the EU RODEO project E-SOH work package (WP3).
+
+toc::[]
+
+[discrete]
+== Revision history
+
+[cols=",,,",]
+|=======================================================================
+|Version |Date |Comment |Responsible
+
+|1.0 |2023-04-28 |First version |Morten W. Hansen
+
+|=======================================================================
+
+
