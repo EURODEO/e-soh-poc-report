@@ -1,0 +1,37 @@
+name: 'html/pdf'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'source/**'
+  schedule:
+    - cron:  '23 2 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: create html and pdf and update source/acdd-elements.adoc
+      run: |
+        docker-compose -f docker-compose.asciidoctor.yml up
+
+    - name: commit changed files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        cp html/data-management-handbook.html docs/index.html
+        cp -r html/images docs/
+        git add -f docs/index.html
+        git add -f docs/images/*
+        git commit -m "Automatically updated by GitHub Action"
+
+    - name: push code to ${{ github.ref }}
+      run: |
+        remote_repo="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+        git push "${remote_repo}" HEAD:${{ github.ref }} --follow-tags
