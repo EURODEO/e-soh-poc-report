@@ -23,11 +23,3 @@ include::previous-exp.adoc[]
 :numbered:
 include::conclusions.adoc[]
 
-:numbered!:
-include::acknowledgements.adoc[]
-
-:numbered!:
-include::glossary.adoc[]
-
-:numbered!:
-include::acronyms.adoc[]
