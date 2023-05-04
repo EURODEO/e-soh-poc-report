@@ -28,3 +28,6 @@ asciidoctor-pdf -r asciidoctor-diagram \
       -a imagesdir=$IMAGES_DIR \
       -n source/proof-of-concept-report.adoc \
       -D $PDF_DIR
+
+cp $HTML_DIR/data-management-handbook.html docs/index.html
+cp -r $HTML_DIR/images docs/
