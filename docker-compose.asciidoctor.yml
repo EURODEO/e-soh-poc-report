@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+
+  compile-docs:
+    build:
+      context: .
+      dockerfile: Dockerfile.asciidoctor
+    volumes:
+      - .:/workdir
+      - ./html:/html
+      - ./pdf:/pdf
+    command: ./compile-docs.sh

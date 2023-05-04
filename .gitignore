@@ -1,3 +1,7 @@
 e-soh-poc-doc.html
 *TMP
 *~
+.vagrant/
+html/
+pdf/
+*.log

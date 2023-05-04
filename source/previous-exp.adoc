@@ -1,0 +1,21 @@
+== Previous experiences (prior to RODEO/E-SOH project)
+
+=== Experiences on PostGIS-based database for 3rdparty observations
+
+include::3rdpartyPGIS-at-FMI.adoc[]
+
+=== Experiences on using Geomesa and S3 storage for 3rdparty observations (FMI, Finland)
+
+include::3rdparty-GeomesaS3-at-FMI.adoc[]
+
+=== Experiences on OGC EDR API technology at FMI (Finland)
+
+include::EDR-at-FMI.adoc[]
+
+=== Experiences on OGC EDR API technology at KNMI (Netherlands)
+
+include::EDR-at-KNMI.adoc[]
+
+=== NMHS observation pipelines today
+
+include::current-data-management.adoc[]

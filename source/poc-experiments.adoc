@@ -6,37 +6,21 @@ In this chapter we document some experiments/studies done during the design phas
 [[ecmwf-ewc-infrastructure]]
 === ECMWF EWC-Infrastructure
 
-The ECMWF EWC Infrastructure is a cloud-based infrastructure which makes it easier to work with big data. For now it's in a pilot phase to test various use cases.
+include::infrastructure-poc.adoc[]
 
-==== Running things on EWC
+[[netcdf-vs-postgres]]
+=== NetCDF versus Postgres
 
-We have tested a couple of VMs and everything worked well so far. Also logging in to the VMs remotely is working with ssh-keys (only RSA and OpenSSH).
-Mainly tested OS was CentOS 7.9 and later Rocky 8.6-3.
-The mentioned OS are already old and only have a limited time for security patches.
-So future upgrades of the OS may be required, also we have to see which versions will be available in the future.
-For now there is no final confirmation for the OS images that will be provided in the new EWC operational infrastructure, but they expect to provide Rocky Linux 8.x and latest Ubuntu LTS.
-Also we have tested if the requirements for WIS 2.0 are met.
+include::datastore-sqlvsfiles.adoc[]
 
-===== Requirements for WIS 2.0
+=== TimescaleDB research/experiments
 
-* __Python3__ Version 3.8 or higher
-* __Docker Engine__ Version 20.10.14 or higher
-* __Docker Compose__ Version 1.29.2
+include::datastore-timescaledb.adoc[]
 
----
+=== WIS 2.0 in a box (wis2box) evaluation
 
-===== CentOS 7.9
+include::wis2box.adoc[]
 
-* Python 3.10.8
-* Docker 23.0.1 via https://docs.docker.com/engine/install/centos/
-* Docker-Compose v2.16.0 via https://docs.docker.com/compose/install/linux/#install-using-the-repository
+=== Metadata output
 
-All requirements for WIS 2.0 should be met in CentOS 7.9.
-
-===== Rocky 8.6-3
-
-* Python 3.9.13 via https://kifarunix.com/install-python-on-rocky-linux-8/
-* Docker 23.0.1 via https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-rocky-linux-8#step-1-installing-docker
-* Docker-Compose v2.16.0
-
-All requirements for WIS 2.0 should also be met in Rocky 8.6-3
+include::metadata-output.adoc[]

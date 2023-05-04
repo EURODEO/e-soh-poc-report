@@ -17,6 +17,12 @@ include::introduction.adoc[]
 :numbered:
 include::poc-experiments.adoc[]
 
+:numbered:
+include::previous-exp.adoc[]
+
+:numbered:
+include::conclusions.adoc[]
+
 :numbered!:
 include::acknowledgements.adoc[]
 
