@@ -1,4 +1,4 @@
-= Conclusions
+== Conclusions
 
 In this document we presented both the experiences gathered from Proof-of-Concept (PoC) experiments during the E-SOH project and some selected prior experience from the participating institutes.
 
