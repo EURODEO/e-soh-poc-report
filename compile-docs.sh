@@ -29,5 +29,5 @@ asciidoctor-pdf -r asciidoctor-diagram \
       -n source/proof-of-concept-report.adoc \
       -D $PDF_DIR
 
-cp $HTML_DIR/data-management-handbook.html docs/index.html
-cp -r $HTML_DIR/images docs/
+cp $HTML_DIR/proof-of-concept-report.html docs/index.html
+cp -r source/$IMAGES_DIR docs/

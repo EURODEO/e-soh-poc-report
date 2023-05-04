@@ -8,9 +8,11 @@ LABEL maintainer="mortenwh@met.no"
 
 RUN mkdir /workdir; \
     mkdir /pdf; \
-    mkdir /html
+    mkdir /html; \
+    mkdir /docs
 
 VOLUME /html
 VOLUME /pdf
+VOLUME /docs
 VOLUME /workdir
 WORKDIR /workdir

@@ -10,4 +10,5 @@ services:
       - .:/workdir
       - ./html:/html
       - ./pdf:/pdf
+      - ./docs:/docs
     command: ./compile-docs.sh
