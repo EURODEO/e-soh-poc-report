@@ -1,4 +1,3 @@
-## TimescaleDB research/experiments
 TimescaleDB is an open-source database designed to make SQL scalable for time-series data.  
 It extends PostgreSQL with features such as native time-series partitioning, compression, and continuous aggregates to improve the performance and scalability of time-series data management.
 
@@ -16,7 +15,6 @@ TimescaleDB also support master-replica setup as it is built on top of PostgreSQ
 
 How to test:
 
-- Add Timescale extension to current PostGIS database
-- Add new TimescaleDB backend to https://github.com/EURODEO/e-soh-datastore-poc/tree/main/tstester (main thing is to convert regular tables to hypertables) 
-- Experiment with different setups (changing chunk_time_interval, maybe test how compression affects ingestion performance and so on).
-
+* Add Timescale extension to current PostGIS database
+* Add new TimescaleDB backend to https://github.com/EURODEO/e-soh-datastore-poc/tree/main/tstester (main thing is to convert regular tables to hypertables) 
+* Experiment with different setups (changing chunk_time_interval, maybe test how compression affects ingestion performance and so on).

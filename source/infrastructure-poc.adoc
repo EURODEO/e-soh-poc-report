@@ -1,9 +1,6 @@
-## ECMWF EWC-Infrastructure
+The ECMWF EWC Infrastructure is a cloud-based infrastructure which makes it easier to work with big data. For now it's in a pilot phase to test various use cases.
 
-It is a cloud-based infrastructure which makes it easier to work with big data.
-For now it's in a pilot phase to test various use cases.
-
-### Running things on EWC
+==== Running things on EWC
 
 We have tested a couple of VMs and everything worked well so far. Also logging in to the VMs remotely is working with ssh-keys (only RSA and OpenSSH).
 Mainly tested OS was CentOS 7.9 and later Rocky 8.6-3.
@@ -12,7 +9,7 @@ So future upgrades of the OS may be required, also we have to see which versions
 For now there is no final confirmation for the OS images that will be provided in the new EWC operational infrastructure, but they expect to provide Rocky Linux 8.x and latest Ubuntu LTS.
 Also we have tested if the requirements for WIS 2.0 are met.
 
-#### Requirements for WIS 2.0
+===== Requirements for WIS 2.0
 
 * __Python3__ Version 3.8 or higher
 * __Docker Engine__ Version 20.10.14 or higher
@@ -20,7 +17,7 @@ Also we have tested if the requirements for WIS 2.0 are met.
 
 ---
 
-#### CentOS 7.9
+===== CentOS 7.9
 
 * Python 3.10.8
 * Docker 23.0.1 via https://docs.docker.com/engine/install/centos/
@@ -28,7 +25,7 @@ Also we have tested if the requirements for WIS 2.0 are met.
 
 All requirements for WIS 2.0 should be met in CentOS 7.9.
 
-#### Rocky 8.6-3
+===== Rocky 8.6-3
 
 * Python 3.9.13 via https://kifarunix.com/install-python-on-rocky-linux-8/
 * Docker 23.0.1 via https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-rocky-linux-8#step-1-installing-docker

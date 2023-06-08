@@ -1,6 +1,6 @@
-# Conclusions
+== Conclusions
 
-In this document we presented both the experiences gathered from PoC (proof-of-concept) experiments during the E-SOH project and some selected prior experience from the participating institutes.
+In this document we presented both the experiences gathered from Proof-of-Concept (PoC) experiments during the E-SOH project and some selected prior experience from the participating institutes.
 
 Architecture decisions are covered by the architecture document, so this PoC report is not commenting suitability/feasibility of evaluated techniques or solutions. 
 
@@ -11,4 +11,3 @@ As the conclusion from the PoCs, the key findings are:
 * Elastic (formerly Elasticsearch) is one promising option for data store (document DB for JSON files, geo-query support) (Elastic&wis2box PoCs)
 * GIS-capable relational database, namely PostGIS (with or without timescaleDB extension) is another potential option for data store. (netcdf vs. DB PoC)
 * there are earlier encouraging expriences on PostGIS-based solution for similar kind of needs, and expertise on that, and expertise on EDR API implementation within the project concortium (previous experiences chapter and its subsections)
-
