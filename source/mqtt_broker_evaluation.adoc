@@ -1,0 +1,51 @@
+
+Technologies investigated:
+
+* Mosquitto
+* RabbitMQ
+* nat jetstream + mqtt enabled
+* HiveMQ
+* EMQX
+* VerneMQ
+
+Mosqitto, HiveMQ and EMQX was disregarded due to lack of needed features or such features beeing behind a paywall.
+
+
+
+== RabbitMQ
+
+* TLS support: Yes
+* Message persistence support: Yes
+* Authentication: Yes
+* Clustering support: Yes
+* MQTT protocol support: v3.1.1 (as a plugin). RabbitMQ 3.13, the next release series, is expected to be released end of 2023 and will support MQTT protocol version 5.0.
+* Free/Open source: Yes
+
+* Pros:
+** Wide adoption
+** Supported by VMware
+** Supports all needed features
+** Also has support for other message protocols
+* Cons:
+** Does not support mqtt v5 as of latest release
+
+== VerneMQ
+
+* TLS support: Yes
+* Message persistence support: No
+* Authentication: Yes
+* Clustering support: Yes
+* MQTT protocol support: v3.1.1  and v5
+* Free/Open source: Yes
+
+* Pros:
+** Supports all needed features
+** Only supports mqtt, less complex
+* Cons:
+** No possiblity for message persistance
+
+== Need resolving before descion
+
+* Do we need assurenace of mqtt v5 before descion, RabbitMQ seems to be lanching v5 before end of year.
+* Are METno going to use the broker, do METno need persistance
+* Clients must have a way to retrive old messages without persitance
