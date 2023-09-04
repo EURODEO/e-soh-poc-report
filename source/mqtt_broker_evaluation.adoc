@@ -42,7 +42,7 @@ Mosquitto, HiveMQ and EMQX was disregarded due to lack of needed features or suc
 ** Supports all needed features
 ** Only supports mqtt, less complex
 * Cons:
-** No possiblity for message persistance
+** No possiblity for message persistence, but this is ok according to the design decisions in E-SOH. The API endpoints will provide possibility to retrieve data 24 hours back in time.
 
 == Need resolving before descion
 
