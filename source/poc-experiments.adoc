@@ -25,6 +25,6 @@ include::wis2box.adoc[]
 
 include::metadata-output.adoc[]
 
-== MQTT broker evaluation
+=== MQTT broker evaluation
 
 include::mqtt_broker_evaluation.adoc[]
