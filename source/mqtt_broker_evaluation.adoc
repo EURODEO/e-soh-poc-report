@@ -3,7 +3,7 @@ Technologies investigated:
 
 * Mosquitto
 * RabbitMQ
-* nat jetstream + mqtt enabled
+* nats jetstream + mqtt enabled
 * HiveMQ
 * EMQX
 * VerneMQ
