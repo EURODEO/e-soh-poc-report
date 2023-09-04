@@ -12,7 +12,7 @@ Mosqitto, HiveMQ and EMQX was disregarded due to lack of needed features or such
 
 
 
-== RabbitMQ
+==== RabbitMQ
 
 * TLS support: Yes
 * Message persistence support: Yes
