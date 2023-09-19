@@ -8,7 +8,13 @@ Technologies investigated:
 * EMQX
 * VerneMQ
 
-Mosquitto, HiveMQ and EMQX was disregarded due to lack of needed features or such features beeing behind a paywall.
+Requirements:
+
+* req 1
+* req 2
+* ...
+
+Mosquitto, HiveMQ and EMQX was disregarded due to lack of .. or .. being behind a paywall.
 
 
 
