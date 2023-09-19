@@ -29,7 +29,7 @@ Mosquitto, HiveMQ and EMQX was disregarded due to lack of needed features or suc
 * Cons:
 ** Does not support mqtt v5 as of latest release
 
-== VerneMQ
+==== VerneMQ
 
 * TLS support: Yes
 * Message persistence support: No
