@@ -1,0 +1,57 @@
+
+Technologies investigated:
+
+* Mosquitto
+* RabbitMQ
+* nats jetstream + mqtt enabled
+* HiveMQ
+* EMQX
+* VerneMQ
+
+Requirements:
+
+* req 1
+* req 2
+* ...
+
+Mosquitto, HiveMQ and EMQX was disregarded due to lack of .. or .. being behind a paywall.
+
+
+
+==== RabbitMQ
+
+* TLS support: Yes
+* Message persistence support: Yes
+* Authentication: Yes
+* Clustering support: Yes
+* MQTT protocol support: v3.1.1 (as a plugin). RabbitMQ 3.13, the next release series, is expected to be released end of 2023 and will support MQTT protocol version 5.0.
+* Free/Open source: Yes
+
+* Pros:
+** Wide adoption
+** Supported by VMware
+** Supports all needed features
+** Also has support for other message protocols
+* Cons:
+** Does not support mqtt v5 as of latest release
+
+==== VerneMQ
+
+* TLS support: Yes
+* Message persistence support: No
+* Authentication: Yes
+* Clustering support: Yes
+* MQTT protocol support: v3.1.1  and v5
+* Free/Open source: Yes
+
+* Pros:
+** Supports all needed features
+** Only supports mqtt, less complex
+* Cons:
+** No possiblity for message persistence, but this is ok according to the design decisions in E-SOH. The API endpoints will provide possibility to retrieve data 24 hours back in time.
+
+==== Need resolving before descion
+
+* Do we need assurance of mqtt v5 before deciding? RabbitMQ seems to be launching v5 before the end of the year.
+* Is MET Norway going to use the broker, and does MET Norway need persistence?
+* Clients must have a way to retrieve old messages if a solution without persistence is selected, but the EDR API should be able to handle this.
