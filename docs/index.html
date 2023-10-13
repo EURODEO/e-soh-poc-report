@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="author" content="Lasse Latva, Johannes Tobiassen Langvatn, Jo Asplin, Lukas Phaf, Matti Hämälainen, Mikko Visa, Daniel Heintze, Morten Wergeland Hansen.">
 <title>E-SOH Proof of Concept Document</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -209,10 +209,13 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -391,7 +394,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -503,6 +506,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_metadata_output">2.5. Metadata output</a></li>
+<li><a href="#_mqtt_broker_evaluation">2.6. MQTT broker evaluation</a>
+<ul class="sectlevel3">
+<li><a href="#_rabbitmq">2.6.1. RabbitMQ</a></li>
+<li><a href="#_vernemq">2.6.2. VerneMQ</a></li>
+<li><a href="#_need_resolving_before_descion">2.6.3. Need resolving before descion</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_previous_experiences_prior_to_rodeoe_soh_project">3. Previous experiences (prior to RODEO/E-SOH project)</a>
@@ -572,6 +582,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">1.0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2023-04-28</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">First version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Morten W. Hansen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2023-10-13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Updates from build work</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Morten W. Hansen</p></td>
 </tr>
 </tbody>
@@ -1112,6 +1128,171 @@ one can create a <a href="https://htmlpreview.github.io/?https://github.com/metn
 </div>
 <div class="paragraph">
 <p>Deciding on one internal metadata format will then facilitate increased interoperability when translations between the different metadata-formats are in place.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mqtt_broker_evaluation"><a class="anchor" href="#_mqtt_broker_evaluation"></a>2.6. MQTT broker evaluation</h3>
+<div class="paragraph">
+<p>Technologies investigated:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Mosquitto</p>
+</li>
+<li>
+<p>RabbitMQ</p>
+</li>
+<li>
+<p>nats jetstream + mqtt enabled</p>
+</li>
+<li>
+<p>HiveMQ</p>
+</li>
+<li>
+<p>EMQX</p>
+</li>
+<li>
+<p>VerneMQ</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Requirements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>req 1</p>
+</li>
+<li>
+<p>req 2</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Mosquitto, HiveMQ and EMQX was disregarded due to lack of .. or .. being behind a paywall.</p>
+</div>
+<div class="sect3">
+<h4 id="_rabbitmq"><a class="anchor" href="#_rabbitmq"></a>2.6.1. RabbitMQ</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>TLS support: Yes</p>
+</li>
+<li>
+<p>Message persistence support: Yes</p>
+</li>
+<li>
+<p>Authentication: Yes</p>
+</li>
+<li>
+<p>Clustering support: Yes</p>
+</li>
+<li>
+<p>MQTT protocol support: v3.1.1 (as a plugin). RabbitMQ 3.13, the next release series, is expected to be released end of 2023 and will support MQTT protocol version 5.0.</p>
+</li>
+<li>
+<p>Free/Open source: Yes</p>
+</li>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wide adoption</p>
+</li>
+<li>
+<p>Supported by VMware</p>
+</li>
+<li>
+<p>Supports all needed features</p>
+</li>
+<li>
+<p>Also has support for other message protocols</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Does not support mqtt v5 as of latest release</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_vernemq"><a class="anchor" href="#_vernemq"></a>2.6.2. VerneMQ</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>TLS support: Yes</p>
+</li>
+<li>
+<p>Message persistence support: No</p>
+</li>
+<li>
+<p>Authentication: Yes</p>
+</li>
+<li>
+<p>Clustering support: Yes</p>
+</li>
+<li>
+<p>MQTT protocol support: v3.1.1  and v5</p>
+</li>
+<li>
+<p>Free/Open source: Yes</p>
+</li>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Supports all needed features</p>
+</li>
+<li>
+<p>Only supports mqtt, less complex</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>No possiblity for message persistence, but this is ok according to the design decisions in E-SOH. The API endpoints will provide possibility to retrieve data 24 hours back in time.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_need_resolving_before_descion"><a class="anchor" href="#_need_resolving_before_descion"></a>2.6.3. Need resolving before descion</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Do we need assurance of mqtt v5 before deciding? RabbitMQ seems to be launching v5 before the end of the year.</p>
+</li>
+<li>
+<p>Is MET Norway going to use the broker, and does MET Norway need persistence?</p>
+</li>
+<li>
+<p>Clients must have a way to retrieve old messages if a solution without persistence is selected, but the EDR API should be able to handle this.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -1789,7 +1970,7 @@ even for the smallest request size.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-06-08 11:54:50 UTC
+Last updated 2023-10-13 14:18:44 UTC
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/3.0.7/tocbot.min.js"></script>
