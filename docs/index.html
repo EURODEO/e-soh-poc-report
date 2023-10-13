@@ -436,6 +436,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<script src="/assets/js/tocbot.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
+
+<style>
+  #tocbot a.toc-link.node-name--H2{ font-weight:700; }
+  @media screen{
+
+    #tocbot a.toc-link{ height:100% }
+    .is-collapsible{ max-height:3000px; overflow:hidden; }
+    .is-collapsed{ max-height:0 }
+    .is-active-link{ font-weight:700; font-color:#ba3925; }
+
+  }
+  @media print{
+    #tocbot a.toc-link.node-name--H4{ display:none }
+  }
+</style>
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
@@ -488,6 +506,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_metadata_output">2.5. Metadata output</a></li>
+<li><a href="#_mqtt_broker_evaluation">2.6. MQTT broker evaluation</a>
+<ul class="sectlevel3">
+<li><a href="#_rabbitmq">2.6.1. RabbitMQ</a></li>
+<li><a href="#_vernemq">2.6.2. VerneMQ</a></li>
+<li><a href="#_need_resolving_before_descion">2.6.3. Need resolving before descion</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_previous_experiences_prior_to_rodeoe_soh_project">3. Previous experiences (prior to RODEO/E-SOH project)</a>
@@ -557,6 +582,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">1.0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2023-04-28</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">First version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Morten W. Hansen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2023-10-13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Updates from build work</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Morten W. Hansen</p></td>
 </tr>
 </tbody>
@@ -1097,6 +1128,171 @@ one can create a <a href="https://htmlpreview.github.io/?https://github.com/metn
 </div>
 <div class="paragraph">
 <p>Deciding on one internal metadata format will then facilitate increased interoperability when translations between the different metadata-formats are in place.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mqtt_broker_evaluation"><a class="anchor" href="#_mqtt_broker_evaluation"></a>2.6. MQTT broker evaluation</h3>
+<div class="paragraph">
+<p>Technologies investigated:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Mosquitto</p>
+</li>
+<li>
+<p>RabbitMQ</p>
+</li>
+<li>
+<p>nats jetstream + mqtt enabled</p>
+</li>
+<li>
+<p>HiveMQ</p>
+</li>
+<li>
+<p>EMQX</p>
+</li>
+<li>
+<p>VerneMQ</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Requirements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>req 1</p>
+</li>
+<li>
+<p>req 2</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Mosquitto, HiveMQ and EMQX was disregarded due to lack of .. or .. being behind a paywall.</p>
+</div>
+<div class="sect3">
+<h4 id="_rabbitmq"><a class="anchor" href="#_rabbitmq"></a>2.6.1. RabbitMQ</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>TLS support: Yes</p>
+</li>
+<li>
+<p>Message persistence support: Yes</p>
+</li>
+<li>
+<p>Authentication: Yes</p>
+</li>
+<li>
+<p>Clustering support: Yes</p>
+</li>
+<li>
+<p>MQTT protocol support: v3.1.1 (as a plugin). RabbitMQ 3.13, the next release series, is expected to be released end of 2023 and will support MQTT protocol version 5.0.</p>
+</li>
+<li>
+<p>Free/Open source: Yes</p>
+</li>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wide adoption</p>
+</li>
+<li>
+<p>Supported by VMware</p>
+</li>
+<li>
+<p>Supports all needed features</p>
+</li>
+<li>
+<p>Also has support for other message protocols</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Does not support mqtt v5 as of latest release</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_vernemq"><a class="anchor" href="#_vernemq"></a>2.6.2. VerneMQ</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>TLS support: Yes</p>
+</li>
+<li>
+<p>Message persistence support: No</p>
+</li>
+<li>
+<p>Authentication: Yes</p>
+</li>
+<li>
+<p>Clustering support: Yes</p>
+</li>
+<li>
+<p>MQTT protocol support: v3.1.1  and v5</p>
+</li>
+<li>
+<p>Free/Open source: Yes</p>
+</li>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Supports all needed features</p>
+</li>
+<li>
+<p>Only supports mqtt, less complex</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>No possiblity for message persistence, but this is ok according to the design decisions in E-SOH. The API endpoints will provide possibility to retrieve data 24 hours back in time.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_need_resolving_before_descion"><a class="anchor" href="#_need_resolving_before_descion"></a>2.6.3. Need resolving before descion</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Do we need assurance of mqtt v5 before deciding? RabbitMQ seems to be launching v5 before the end of the year.</p>
+</li>
+<li>
+<p>Is MET Norway going to use the broker, and does MET Norway need persistence?</p>
+</li>
+<li>
+<p>Clients must have a way to retrieve old messages if a solution without persistence is selected, but the EDR API should be able to handle this.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -1774,8 +1970,42 @@ even for the smallest request size.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-05-04 16:04:23 UTC
+Last updated 2023-10-13 14:18:44 UTC
 </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/3.0.7/tocbot.min.js"></script>
+<script>
+    /* Tocbot dynamic TOC, works with tocbot 3.0.7 */
+    var oldtoc = document.getElementById('toctitle').nextElementSibling;
+    var newtoc = document.createElement('div');
+    newtoc.setAttribute('id', 'tocbot');
+    newtoc.setAttribute('class', 'js-toc');
+    oldtoc.parentNode.replaceChild(newtoc, oldtoc);
+    tocbot.init({ contentSelector: '#content',
+        headingSelector: 'h1, h2, h3, h4',
+        smoothScroll: false,
+        collapseDepth: 2 });
+    var handleTocOnResize = function() {
+        var width = window.innerWidth
+                    || document.documentElement.clientWidth
+                    || document.body.clientWidth;
+        if (width < 768) {
+            tocbot.refresh({ contentSelector: '#content',
+                headingSelector: 'h1, h2, h3, h4',
+                collapseDepth: 6,
+                activeLinkClass: 'ignoreactive',
+                throttleTimeout: 1000,
+                smoothScroll: false });
+        }
+        else {
+            tocbot.refresh({ contentSelector: '#content',
+                headingSelector: 'h1, h2, h3, h4',
+                smoothScroll: false,
+                collapseDepth: 2 });
+        }
+    };
+    window.addEventListener('resize', handleTocOnResize);
+    handleTocOnResize();
+</script>
 </body>
 </html>
