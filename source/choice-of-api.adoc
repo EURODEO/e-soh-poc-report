@@ -1,0 +1,10 @@
+== Choice of api
+=== pygeoapi
+Pygeoapi is still in a pre v1 development stage, and is continually getting updates. Since the project are in such a pre v1 stage there is no guarantee that versions up until version 1 will keep inter version compatibility. There are several large projects that already use this API, this do build some certainty that compatibility is important for the project as to not break deployments for institutes that already use it. This is also an OGC API reference implementation, and one can expect that the APIs with complete OGC standards do not change unless the standard is to change. Currently listed live deployments of pygeoapi https://github.com/geopython/pygeoapi/wiki/LiveDeployments .
+
+Both solutions make use of the flask framework, pygeoapi seems to prefer the use of gunicorn, optionally with starlette. This way pygeoapi can provide both WSGI or ASGI web service.
+
+In the ESOH project I do not know of any partner institutes that currently have any experience with pygeoapi. In regards to the KNMI solution, only KNIM have experience with this solution. For everyone else involved in the API development there seems to no difference in choice of pygeoapi or KNMI solution.
+
+In summary I see no reason why we should not take advantage of pygeoapi and its features. It will offer little hindrance to implement KNMIs excellent covJSON tools into the EDR endpoint in pygeoapi. pygeoapi also offers more endpoints than EDR, which will be necessary if we want to completely create an api after the FAIR principles. In regards to the FAIR principles the interoperability of data and metadata seems to be the largest hurdle we will face. None of the solutions provide an answer for this out of the box, and will have to be implemented separately.
+
